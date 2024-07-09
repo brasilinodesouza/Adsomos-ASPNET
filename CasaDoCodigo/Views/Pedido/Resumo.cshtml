@@ -1,3 +1,46 @@
-﻿<h1>
-    pagina do resumo
-</h1>
+﻿@{
+    ViewData["Title"] = "Resumo";
+}
+
+<h3>Resumo do Pedido</h3>
+
+
+<div class="card">
+    
+
+    <div class="card-body">
+        <div class="row"><h2>
+            <div class="col-md-12"> 
+                Numero do pedido: 123456
+            </div>
+        </h2></div>
+        <hr />
+        <div class="row">
+            <div class="col-md-3">
+                <h4>Seus Dados</h4>
+                <div>Brasilino de Souza Neto</div>
+                <div>(47) 99999-9999</div>
+            </div>
+            <div class="col-md-3">
+                <h4>E-mail</h4>
+                neto.bq@gmail.com
+            </div>
+            <div class="col-md-6">
+                <h4>Endereço de entrega</h4>
+                <div>Rua Antonio Mafra - Brusque - SC</div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-10">
+                <h2>Item</h2>
+                <div>REST</div>
+            </div>
+
+            <div class="col-md-2">
+                <h2>Quantidade</h2>
+                <div class="float-end">1</div>
+            </div>
+        </div>
+    </div>
+</div>
