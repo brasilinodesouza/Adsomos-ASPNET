@@ -6,68 +6,94 @@
 
 <div id="carouselExampleCaptions" class="carousel slide">
     <div class="carousel-indicators">
+
+
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
     </div>
     <div class="carousel-inner" role="listbox">
-        <div class="item active">
 
+
+        <div class="carousel-item active">
             <div class="row">
-                <div class="col-md-3">
-                    <div class="carousel-item active">
-                        <img src="~/imagens/produtos/large_1.jpg" />
-                        <div class="panel-footer">
-                            <div>Camisa erro 404</div>
-                            <div>R$59,99</div>
-                            <div class="text-center">
-                                <a asp-action="carrinho"> Adicionar </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="carousel-item1">
-                        <img src="~/imagens/produtos/large_2.jpg" />
-                        <div class="panel-footer">
-                            <div>Camisa 2</div>
-                            <div>R$59,99</div>
-                            <div class="text-center">
-                                <a asp-action="carrinho"> Adicionar </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="carousel-item2">
-                        <img src="~/imagens/produtos/large_3.jpg" />
-                        <div class="panel-footer">
-                            <div>Camisa 3</div>
-                            <div>R$59,99</div>
-                            <div class="text-center">
-                                <a asp-action="carrinho"> Adicionar </a>
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="carousel-item3">
-                        <img src="~/imagens/produtos/large_4.jpg" />
-                        <div class="panel-footer">
-                            <div>Camisa 3</div>
-                            <div>R$59,99</div>
-                            <div class="text-center">
-                                <a asp-action="carrinho"> Adicionar </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-
+                @for (int i = 1; i < 4; i++)
+                {
+                   <div class="col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <img src="~/imagens/produtos/large_@(i).jpg" />
+                            </div>
+                            <div class="panel-footer">
+                                <div>Produto@(i)</div>
+                                <div>R$59,99</div>
+                                <div class="text-center">
+                                    <a asp-action="carrinho"> Adicionar </a>
+                                </div>
+                            </div>
+                        </div>
+                   </div>   
+                }
             </div>
-
-
         </div>
+
+
+
+        <div class="carousel-item">
+            <div class="row">
+
+                @for (int i = 4; i < 7; i++)
+                {
+                    <div class="col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <img src="~/imagens/produtos/large_@(i).jpg" />
+                            </div>
+                            <div class="panel-footer">
+                                <div>Produto@(i)</div>
+                                <div>R$59,99</div>
+                                <div class="text-center">
+                                    <a asp-action="carrinho"> Adicionar </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div class="row">
+
+                @for (int i = 7; i < 9; i++)
+                {
+                    <div class="col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <img src="~/imagens/produtos/large_@(i).jpg" />
+                            </div>
+                            <div class="panel-footer">
+                                <div>Produto@(i)</div>
+                                <div>R$59,99</div>
+                                <div class="text-center">
+                                    <a asp-action="carrinho"> Adicionar </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
     </div>
- 
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+    
+
