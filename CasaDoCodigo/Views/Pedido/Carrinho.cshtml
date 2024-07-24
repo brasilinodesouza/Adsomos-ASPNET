@@ -1,6 +1,9 @@
 ﻿@{
     ViewData["Title"] = "Carrinho";
 }
+@using CasaDoCodigo.Models;
+@model List<ItemPedido>
+
 
 <h3>Meu Carrinho</h3>
 
@@ -16,13 +19,21 @@
         </div>
     </div>
     <div class="card-body">
-        <div class="row">
-            <div class="col-md-3"><img src="~/imagens/produtos/small_4.jpg" /></div>
-            <div class="col-md-3">REST</div>
-            <div class="col-md-2">R$: 70,00</div>
-            <div class="col-md-2">3</div>
-            <div class="col-md-2"><span class="float-end">R$: 210,00</span></div>
-        </div>
+
+        @foreach (var item in Model)
+        {
+            <div class="row">
+                <div class="col-md-3"><img src="~/imagens/produtos/small_@(item.Id).jpg" /></div>
+                <div class="col-md-3">@item.Produto.Nome</div>
+                <div class="col-md-2">R$: @(item.PrecoUnitario)</div>
+                <div class="col-md-2">@item.Quantidade</div>
+                <div class="col-md-2"><span class="float-end">R$: @item.Subtotal</span></div>
+            </div>          
+        }
+
+
+
+
     </div>
     <div class="card-footer">
         <div class="row">
