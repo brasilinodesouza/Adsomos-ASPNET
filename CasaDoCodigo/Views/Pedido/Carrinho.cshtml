@@ -2,7 +2,8 @@
     ViewData["Title"] = "Carrinho";
 }
 @using CasaDoCodigo.Models;
-@model List<ItemPedido>
+@model CasaDoCodigo.Models.ViewModel.CarrinhoViewModel;
+
 
 
 <h3>Meu Carrinho</h3>
@@ -13,21 +14,21 @@
         
         <div class="row">
             <div class="col-md-6">ITEM</div>
-            <div class="col-md-2">Preço Unitário</div>
-            <div class="col-md-2">Quantidade</div>
+            <div class="col-md-2 text-center">Preço Unitário</div>
+            <div class="col-md-2 text-center">Quantidade</div>
             <div class="col-md-2"><span class="float-end">Subtotal</span></div>
         </div>
     </div>
     <div class="card-body">
 
-        @foreach (var item in Model)
+        @foreach (var item in Model.Itens)
         {
-            <div class="row">
+            <div class="row row-center">
                 <div class="col-md-3"><img src="~/imagens/produtos/small_@(item.Id).jpg" /></div>
                 <div class="col-md-3">@item.Produto.Nome</div>
-                <div class="col-md-2">R$: @(item.PrecoUnitario)</div>
-                <div class="col-md-2">@item.Quantidade</div>
-                <div class="col-md-2"><span class="float-end">R$: @item.Subtotal</span></div>
+                <div class="col-md-2 text-center">R$: @(item.PrecoUnitario)</div>
+                <div class="col-md-2 text-center">@item.Quantidade</div>
+                <div class="col-md-2 "><span class="float-end">R$: @item.Subtotal</span></div>
             </div>          
         }
 
@@ -37,8 +38,20 @@
     </div>
     <div class="card-footer">
         <div class="row">
-            <div class="col-md-10">Total 4 itens</div>
-            <div class="col-md-2"><span class="float-end">Preço total R$: 210,00</span></div>
+            <div class="col-md-10">
+                @{
+                    if(Model.Itens.Count() < 2){
+                        <span>Total: @Model.Itens.Count() item</span>
+                    }else{
+                        <span>Total: @Model.Itens.Count() itens</span>
+                    }
+                    // OU fazer o ternario abaixo
+                    //<span>Total: @Model.Count()@(Model.Count() < 2 ? "item" : "itens") </span>
+                }
+                
+
+            </div>
+            <div class="col-md-2"><span class="float-end">Total R$: @Model.Total </span></div>
         </div>
     </div>
  </div>

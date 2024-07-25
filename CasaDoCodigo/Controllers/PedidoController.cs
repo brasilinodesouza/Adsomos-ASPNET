@@ -1,4 +1,5 @@
 ﻿using CasaDoCodigo.Models;
+using CasaDoCodigo.Models.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CasaDoCodigo.Controllers
@@ -26,17 +27,30 @@ namespace CasaDoCodigo.Controllers
 
         public IActionResult Carrinho()
         {
+            CarrinhoViewModel viewModel = GerCarrinhoViewModel();
+
+            return View(viewModel);
+        }
+
+        private CarrinhoViewModel GerCarrinhoViewModel()
+        {
             var itensCarrinho = new List<ItemPedido>
             {
                 new ItemPedido(1, produtos[0], 1),
                 new ItemPedido(2, produtos[6], 2),
-                new ItemPedido(3, produtos[2], 3)
+                new ItemPedido(3, produtos[2], 3),
+                new ItemPedido(6, produtos[6], 2)
             };
-            
-            
-            return View(itensCarrinho); 
+
+            CarrinhoViewModel viewModel = new CarrinhoViewModel(itensCarrinho);
+            return viewModel;
         }
+
         public IActionResult Resumo()
-        { return View(); }
+        {
+            CarrinhoViewModel viewModel = GerCarrinhoViewModel();
+
+            return View(viewModel); 
+        }
     }
 }
