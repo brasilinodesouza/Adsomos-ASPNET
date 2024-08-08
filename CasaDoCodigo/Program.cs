@@ -2,13 +2,27 @@ using CasaDoCodigo;
 using Microsoft.EntityFrameworkCore;
 using CasaDoCodigo.Models;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+
+builder.Services.AddDbContext<Contexto>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+
+});
+
+
+builder.Services.AddMvc();
+
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -18,18 +32,10 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-public void ConfigureServices(IServiceCollection services)
-{
-    services.AddMvc();
-    String connectionString = @"Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=CasaDoCodigo;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
-    services.AddDbContext<Contexto>(options => options.UseSqlServer(connectionString));
-}
 
 
-builder.Services.AddDbContext<Contexto>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString(@"Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=CasaDoCodigo;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False"));
-});
+
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
