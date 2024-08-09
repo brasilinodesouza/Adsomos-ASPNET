@@ -1,6 +1,8 @@
 ﻿@{
     ViewData["Title"] = "Carrosel";
 }
+@model List<Produto>
+
 
 <h3> Catalago</h3>
 
@@ -11,66 +13,32 @@
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
     </div>
     <div class="carousel-inner">
+        @{
+            const int TAMANHO_PAGINA = 3;
+            int numPaginas = Model.Count() / TAMANHO_PAGINA;
+        }
+        @for (int pagina = 0; pagina < numPaginas; pagina++)
+        {
 
-        
-
-        <div class="carousel-item active">
-            <div class="row">
-
-                @for (int i = 0; i < 3; i++)
-                {
-                    <div class="col-md-4">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                <img src="~/imagens/produtos/large_@(Model[i].Id).jpg" />
-                            </div>
-                            <div class="panel-footer">
-                                <div>@(Model[i].Nome)</div>
-                                <div>R$ @(Model[i].Preco.ToString("F"))</div>
-                                <div class="text-center">
-                                    <a asp-action="carrinho"> Adicionar </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                }
-            </div>
-        </div>
-        <div class="carousel-item">
-            <div class="row">
-
-                @for (int i = 3; i < 6; i++)
-                {
-                    <div class="col-md-4">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                <img src="~/imagens/produtos/large_@(Model[i].Id).jpg" />
-                            </div>
-                            <div class="panel-footer">
-                                <div>@(Model[i].Nome)</div>
-                                <div>R$ @(Model[i].Preco.ToString("F"))</div>
-                                <div class="text-center">
-                                    <a asp-action="carrinho"> Adicionar </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                }
-            </div>
-        </div>
-        <div class="carousel-item">
+            <div class="carousel-item @(pagina == 0 ? "active" : "")">
                 <div class="row">
+                    @{
+                        var produtosDaPagina = 
+                        Model
+                        .Skip(TAMANHO_PAGINA * pagina)
+                        .Take(TAMANHO_PAGINA);
+                    }
 
-                    @for (int i = 6; i < 9; i++)
+                    @foreach (var produto in produtosDaPagina)
                     {
                         <div class="col-md-4">
                             <div class="panel panel-default">
                                 <div class="panel-body">
-                                <img src="~/imagens/produtos/large_@(Model[i].Id).jpg" />
+                                    <img src="~/imagens/produtos/large_@(produto.Id).jpg" />
                                 </div>
                                 <div class="panel-footer">
-                                <div>@(Model[i].Nome)</div>
-                                <div>R$ @(Model[i].Preco.ToString("F"))</div>
+                                    <div>@(produto.Nome)</div>
+                                    <div>R$ @(produto.Preco.ToString("F"))</div>
                                     <div class="text-center">
                                         <a asp-action="carrinho"> Adicionar </a>
                                     </div>
@@ -78,8 +46,11 @@
                             </div>
                         </div>
                     }
+
                 </div>
-        </div>
+            </div>
+        }
+    
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
