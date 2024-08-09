@@ -1,12 +1,17 @@
-﻿namespace CasaDoCodigo.Models
-{
-    public class ItemPedido
-    {
-        public int Id { get; private set; }
-        public Produto Produto { get; private set; }
+﻿using System.Runtime.Serialization;
 
+namespace CasaDoCodigo.Models
+{
+    public class ItemPedido : BaseModel
+    {
+      
+        [DataMember]
+        public Produto Produto { get; private set; }
+        [DataMember]
         public int Quantidade { get; private set; }
+        [DataMember]
         public decimal PrecoUnitario { get; private set; }
+        [DataMember]
         public decimal Subtotal {
             get { return Quantidade * PrecoUnitario; }
         }

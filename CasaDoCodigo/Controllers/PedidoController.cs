@@ -22,12 +22,12 @@ namespace CasaDoCodigo.Controllers
 
         public IActionResult Carrinho()
         {
-            CarrinhoViewModel viewModel = GerCarrinhoViewModel();
+            CarrinhoViewModel viewModel = GetCarrinhoViewModel();
 
             return View(viewModel);
         }
 
-        private CarrinhoViewModel GerCarrinhoViewModel()
+        private CarrinhoViewModel GetCarrinhoViewModel()
         {
             List<Produto> produtos =
                 this._dataService.GetProdutos();
@@ -40,9 +40,14 @@ namespace CasaDoCodigo.Controllers
 
         public IActionResult Resumo()
         {
-            CarrinhoViewModel viewModel = GerCarrinhoViewModel();
+            CarrinhoViewModel viewModel = GetCarrinhoViewModel();
 
             return View(viewModel); 
+        }
+        [HttpPost]
+        public void PostQuantidade([FromBody]ItemPedido input)
+        {
+
         }
     }
 }

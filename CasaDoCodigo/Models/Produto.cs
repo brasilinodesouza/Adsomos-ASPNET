@@ -1,9 +1,13 @@
-﻿namespace CasaDoCodigo.Models
+﻿using System.Runtime.Serialization;
+
+namespace CasaDoCodigo.Models
 {
-    public class Produto
+    public class Produto : BaseModel
     {
-        public int Id { get; private set; }
+        
+        [DataMember]
         public string Nome { get; private set; }
+        [DataMember]
         public decimal Preco { get; private set; }
 
         public Produto()
