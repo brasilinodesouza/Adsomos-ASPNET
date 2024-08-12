@@ -45,9 +45,9 @@ namespace CasaDoCodigo.Controllers
             return View(viewModel); 
         }
         [HttpPost]
-        public void PostQuantidade([FromBody]ItemPedido input)
+        public UpdateItemPedidoResponse PostQuantidade([FromBody]ItemPedido input)
         {
-
+            return _dataService.UpdateItemPedido(input);
         }
     }
 }

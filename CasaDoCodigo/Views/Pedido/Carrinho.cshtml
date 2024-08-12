@@ -23,7 +23,7 @@
 
         @foreach (var item in Model.Itens)
         {
-
+            <h1>@item.Id</h1>
             <div class="row row-center" item-id="@item.Id">
                 <div class="col-md-3"><img src="~/imagens/produtos/small_@(item.Id).jpg" /></div>
                 <div class="col-md-3">@item.Produto.Nome</div>
@@ -31,14 +31,16 @@
                 <div class="col-md-2 text-center">
                     <div class="input-group">
                         <span class="input-group-btn">
-                            <button class="btn btn-default" onclick="carrinho.clickDecremento(this)">
+                            <button class="btn btn-default" 
+                                onclick="carrinho.clickDecremento(this)">
                                 <span class="glyphicon glyphicon-minus">-</span>
                             </button>
                         </span>
                         <input type="text" value="@item.Quantidade" class="form-control text-center" 
                         onblur="carrinho.updateQuantidade(this)"/>
                         <span class="input-group-btn">
-                            <button class="btn btn-default" onclick="carrinho.clickIncremento(this)">
+                            <button class="btn btn-default"
+                                onclick="carrinho.clickIncremento(this)">
                                 <span class="glyphicon glyphicon-plus">+</span>
                             </button>
                         </span>
@@ -57,9 +59,9 @@
             <div class="col-md-10">
                 @{
                     if(Model.Itens.Count() < 2){
-                                <span>Total: @Model.Itens.Count() item</span>
+                                    <span>Total: @Model.Itens.Count() item</span>
                     }else{
-                                <span>Total: @Model.Itens.Count() itens</span>
+                                    <span>Total: @Model.Itens.Count() itens</span>
                     }
                     // OU fazer o ternario abaixo
                     //<span>Total: @Model.Count()@(Model.Count() < 2 ? "item" : "itens") </span>
@@ -86,7 +88,9 @@
     </div>
 </div>
 
+
+
 @section Scripts
 {
-    <script src="c:\aspnet\adsomos-aspnet\casadocodigo\wwwroot\js\carrinho.js"></script>
+    <script src="~/js/carrinho.js"></script>
 }

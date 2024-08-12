@@ -1,4 +1,5 @@
 ﻿using CasaDoCodigo.Models;
+using CasaDoCodigo.Models.ViewModel;
 
 namespace CasaDoCodigo
 {
@@ -45,11 +46,31 @@ namespace CasaDoCodigo
                     this._contexto.Produtos
                         .Add(produto);
                     this._contexto.ItensPedido
-                        .Add(new ItemPedido(produto, 1));
+                        .Add(new ItemPedido( produto, 1));
                 }
                 this._contexto.SaveChanges();
             }
 
+        }
+
+        public UpdateItemPedidoResponse UpdateItemPedido(ItemPedido itemPedido)
+        {
+            var itemPedidoDB = 
+            _contexto.ItensPedido
+                .Where(i => i.Id == itemPedido.Id)
+                .SingleOrDefault();
+        
+            if (itemPedidoDB != null)
+            {
+                itemPedidoDB.AtualizaQuantidade(itemPedido.Quantidade);
+                _contexto.SaveChanges();
+            }
+
+            var itensPedido = _contexto.ItensPedido.ToList();
+
+            var carrinhoViewModel = new CarrinhoViewModel(itensPedido);
+
+            return new UpdateItemPedidoResponse(itemPedido, carrinhoViewModel);
         }
     }
 }
