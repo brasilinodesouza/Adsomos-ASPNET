@@ -1,6 +1,7 @@
 ﻿using CasaDoCodigo.Models;
 using CasaDoCodigo.Models.ViewModel;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace CasaDoCodigo.Controllers
 {
@@ -45,7 +46,7 @@ namespace CasaDoCodigo.Controllers
             return View(viewModel); 
         }
         [HttpPost]
-        public UpdateItemPedidoResponse PostQuantidade([FromBody]ItemPedido input)
+        public UpdateItemPedidoReponse PostQuantidade([FromBody]ItemPedido input)
         {
             return _dataService.UpdateItemPedido(input);
         }

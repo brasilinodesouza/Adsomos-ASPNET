@@ -6,9 +6,9 @@ namespace CasaDoCodigo.Models
     {
         
         [DataMember]
-        public string Nome { get; private set; }
+        public string Nome { get;  set; }
         [DataMember]
-        public decimal Preco { get; private set; }
+        public decimal Preco { get;  set; }
 
         public Produto()
         {

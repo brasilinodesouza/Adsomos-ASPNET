@@ -7,7 +7,7 @@ namespace CasaDoCodigo.Models
     {
 
         [DataMember]
-        public int Id { get; protected set; }
+        public int Id { get;  set; }
 
 
 

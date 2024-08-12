@@ -10,7 +10,6 @@ namespace CasaDoCodigo
     public class Contexto : DbContext
     {
         public DbSet<Produto> Produtos { get; set; }
-        public DbSet<Pedido> Pedido { get; set; }
         public DbSet<ItemPedido> ItensPedido { get; set; }
 
         public Contexto()

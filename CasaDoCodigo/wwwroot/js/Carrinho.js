@@ -11,16 +11,14 @@ class Carrinho {
             Quantidade: qtde
 
         };
-
-       
     }
-
 
     clickIncremento(btn) {
         var data = this.getData(btn);
         data.Quantidade++;
         this.postQuantidade(data)
     }
+
     clickDecremento(btn) {
         var data = this.getData(btn);
         data.Quantidade--;
@@ -40,11 +38,15 @@ class Carrinho {
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(data)
-        
         }).done(function (response) {
-            alert(response.itemPedido.quantidade)
-        });
+            this.setQuantidade(response.itemPedido);
+        }.bind(this));
         
+    }
+
+    setQuantidade(itemPedido) {
+        $('[item-id=' + itemPedido.id + ']')
+        .find('input').val(itemPedido.quantidade)
     }
 }
 
