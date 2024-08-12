@@ -40,14 +40,33 @@ class Carrinho {
             data: JSON.stringify(data)
         }).done(function (response) {
             this.setQuantidade(response.itemPedido);
+            this.setSubtotal(response.itemPedido);
+            this.setTotal(response.carrinhoViewModel);
         }.bind(this));
         
     }
+    setLinhaDoItem(itemPedido) {
+        return $('[item-id=' + itemPedido.id + ']')
+    }
 
     setQuantidade(itemPedido) {
-        $('[item-id=' + itemPedido.id + ']')
+        this.setLinhaDoItem(itemPedido)
         .find('input').val(itemPedido.quantidade)
     }
+
+    setSubtotal(itemPedido) {
+        this.setLinhaDoItem(itemPedido)
+            .find('[subtotal]').html(itemPedido.subtotal.duasCasas());
+    }
+    setTotal(carrinhoViewModel) {
+        $('[total]').html(carrinhoViewModel.total.duasCasas())
+    }
+
+
 }
 
 var carrinho = new Carrinho();
+
+Number.prototype.duasCasas = function () {
+    return this.toFixed(2).replace('.',',');
+}

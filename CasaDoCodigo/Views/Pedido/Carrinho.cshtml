@@ -45,7 +45,11 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-md-2 "><span class="float-end">R$: @item.Subtotal</span></div>
+                <div class="col-md-2 ">
+                    R$: <span class="float-end" subtotal>
+                        @item.Subtotal
+                    </span>
+                </div>
             </div>          
         }
 
@@ -68,7 +72,7 @@
                 
 
             </div>
-            <div class="col-md-2"><span class="float-end">Total R$: @Model.Total </span></div>
+            <div class="col-md-2">Total R$:<span class="float-end" total>@Model.Total </span></div>
         </div>
     </div>
  </div>
