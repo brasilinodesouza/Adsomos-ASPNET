@@ -1,5 +1,6 @@
 ﻿using CasaDoCodigo.Models;
 using CasaDoCodigo.Models.ViewModel;
+using Microsoft.IdentityModel.Abstractions;
 
 namespace CasaDoCodigo
 {
@@ -10,6 +11,24 @@ namespace CasaDoCodigo
         public DataService(Contexto contexto)
         {
             this._contexto = contexto;
+        }
+
+        public void AddItemPedido(int produtoId)
+        {
+            var produto = _contexto.Produtos
+                .Where( p => p.Id == produtoId)
+                .SingleOrDefault();
+            if (produto != null)
+            {
+
+                if (!_contexto.ItensPedido
+                    .Where(i => i.Produto.Id == produtoId)
+                    .Any())
+                {
+                    _contexto.ItensPedido.Add(new ItemPedido(produto, 1));
+                    _contexto.SaveChanges();
+                }
+            }
         }
 
         public List<ItemPedido> GetItensPedidos()
@@ -63,6 +82,10 @@ namespace CasaDoCodigo
             if (itemPedidoDB != null)
             {
                 itemPedidoDB.AtualizaQuantidade(itemPedido.Quantidade);
+                if (itemPedidoDB.Quantidade == 0 )
+                {
+                    _contexto.ItensPedido.Remove(itemPedidoDB);
+                }
                 _contexto.SaveChanges();
 
             }

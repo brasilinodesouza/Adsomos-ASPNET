@@ -9,6 +9,7 @@ namespace CasaDoCodigo
         List<Produto> GetProdutos();
         List<ItemPedido> GetItensPedidos();
         UpdateItemPedidoReponse UpdateItemPedido(ItemPedido itemPedido);
+        void AddItemPedido(int produtoId);
     }
 
 
