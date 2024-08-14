@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 
 namespace CasaDoCodigo
@@ -27,6 +28,9 @@ namespace CasaDoCodigo
         {
             services.AddControllersWithViews();
             services.AddMvc();
+            services.AddDistributedMemoryCache();
+            services.AddSession();
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             string connectionString = 
             Configuration.GetSection("ConnectionStrings").GetValue<string>("Default");
             services.AddDbContext<Contexto>(options => options.UseSqlServer(connectionString));
@@ -54,14 +58,23 @@ namespace CasaDoCodigo
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseSession();
+            /*
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Pedido}/{action=Carrosel}/{id?}");
+            });
+            */
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Pedido}/{action=Carrosel}/{id?}");
             });
-
+            
             IDataService dataService = serviceProvider.GetService<IDataService>();
 
             dataService.InicializaDB();

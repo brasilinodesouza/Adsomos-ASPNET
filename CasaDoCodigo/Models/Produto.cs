@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 
 namespace CasaDoCodigo.Models
 {
@@ -9,6 +10,7 @@ namespace CasaDoCodigo.Models
         public string Nome { get;  set; }
         [DataMember]
         public decimal Preco { get;  set; }
+        
 
         public Produto()
         {

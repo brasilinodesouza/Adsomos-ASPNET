@@ -1,11 +1,16 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
 
 namespace CasaDoCodigo.Models
 {
     public class ItemPedido : BaseModel
     {
-        
         [DataMember]
+        
+        public Pedido Pedido { get;  set; }
+        [DataMember]
+        
         public Produto Produto { get;  set; }
         [DataMember]
         public int Quantidade { get;  set; }
@@ -18,7 +23,7 @@ namespace CasaDoCodigo.Models
 
         
 
-        public ItemPedido(int id, Produto produto, int quantidade) : this( produto,quantidade)
+        public ItemPedido(int id, Pedido pedido ,Produto produto, int quantidade) : this(pedido, produto, quantidade)
         {
             this.Id = id;
 
@@ -26,8 +31,9 @@ namespace CasaDoCodigo.Models
 
         public ItemPedido() { }
 
-        public ItemPedido( Produto produto, int quantidade)
+        public ItemPedido(Pedido pedido, Produto produto, int quantidade)
         {
+            this.Pedido = pedido;
             this.Produto = produto;
             this.Quantidade = quantidade;
             this.PrecoUnitario = produto.Preco;

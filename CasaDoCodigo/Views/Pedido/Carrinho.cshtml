@@ -8,6 +8,9 @@
 
 <h3>Meu Carrinho</h3>
 
+<form method="post">
+    @Html.AntiForgeryToken()
+</form>
 
 <div class="card">
     <div class="card-header">
@@ -80,10 +83,18 @@
 
 <div class="row">
     <div class="col-md-12">
-        <a asp-action="resumo" 
-            class="btn btn-success float-end">
-            Finalizar pedido
-        </a>
+
+        <div class="float-end">
+            <a asp-action="carrosel"
+               class="btn btn-success" >
+                Adicionar mais produtos
+            </a>
+            <a asp-action="cadastro" 
+                class="btn btn-success ">
+                Preencher cadastro
+            </a>
+
+        </div>
 
 
        @*@  @Html.ActionLink("Finalizar pedido", "resumo",null,

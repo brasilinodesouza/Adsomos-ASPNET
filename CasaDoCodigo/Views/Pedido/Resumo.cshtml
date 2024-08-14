@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Resumo";
 }
-@model CasaDoCodigo.Models.ViewModel.CarrinhoViewModel;
+@model Pedido
 
 <h3>Resumo do Pedido</h3>
 
@@ -12,23 +12,23 @@
     <div class="card-body">
         <div class="row"><h2>
             <div class="col-md-12"> 
-                Numero do pedido: 123456
+                Numero do pedido: @Model.Id
             </div>
         </h2></div>
         <hr />
         <div class="row">
             <div class="col-md-3">
                 <h4>Seus Dados</h4>
-                <div>Brasilino de Souza Neto</div>
-                <div>(47) 99999-9999</div>
+                <div>@Model.Nome</div>
+                <div>@Model.Telefone</div>
             </div>
             <div class="col-md-3">
                 <h4>E-mail</h4>
-                neto.bq@gmail.com
+                @Model.Email
             </div>
             <div class="col-md-6">
-                <h4>Endereço de entrega</h4>
-                <div>Rua Antonio Mafra - Brusque - SC</div>
+                <h4>@Model.Endereco</h4>
+                <div>@Model.Municipio - @Model.Estado</div>
             </div>
         </div>
         <hr />

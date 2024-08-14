@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 
 namespace CasaDoCodigo.Models
 {
@@ -7,7 +8,7 @@ namespace CasaDoCodigo.Models
     {
 
         [DataMember]
-        public int Id { get;  set; }
+        public int Id { get; set; }
 
 
 

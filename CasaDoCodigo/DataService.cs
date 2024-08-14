@@ -1,16 +1,19 @@
 ﻿using CasaDoCodigo.Models;
 using CasaDoCodigo.Models.ViewModel;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Abstractions;
+
 
 namespace CasaDoCodigo
 {
     public class DataService : IDataService
     {
         private readonly Contexto _contexto;
-
-        public DataService(Contexto contexto)
+        private readonly IHttpContextAccessor _contextAccessor;
+        public DataService(Contexto contexto, IHttpContextAccessor contextAccessor)
         {
             this._contexto = contexto;
+            this._contextAccessor = contextAccessor;
         }
 
         public void AddItemPedido(int produtoId)
@@ -18,23 +21,75 @@ namespace CasaDoCodigo
             var produto = _contexto.Produtos
                 .Where( p => p.Id == produtoId)
                 .SingleOrDefault();
+
             if (produto != null)
             {
+                int? pedidoID = GetSessisonPedidoId();
+
+                Pedido pedido = null;
+                if (pedidoID.HasValue)
+                {
+                    pedido = _contexto.Pedidos
+                        .Where(p => p.Id == pedidoID.Value)
+                        .SingleOrDefault();
+                }
+
+                if (pedido == null)
+                {
+                    pedido = new Pedido();
+                }
 
                 if (!_contexto.ItensPedido
-                    .Where(i => i.Produto.Id == produtoId)
+                    .Where(i =>
+                        i.Pedido.Id == pedido.Id
+                        && i.Produto.Id == produtoId)
                     .Any())
                 {
-                    _contexto.ItensPedido.Add(new ItemPedido(produto, 1));
+                    _contexto.ItensPedido.Add(new ItemPedido(pedido, produto, 1));
                     _contexto.SaveChanges();
+
+                    SetSessionPedidoId(pedido);
+
                 }
             }
         }
 
+        private void SetSessionPedidoId(Pedido pedido)
+        {
+            _contextAccessor.HttpContext
+                .Session.SetInt32("pedidoId", pedido.Id);
+        }
+
+        private int? GetSessisonPedidoId()
+        {
+            return _contextAccessor.HttpContext
+                .Session.GetInt32("pedidoId");
+        }
+
+
+
+
         public List<ItemPedido> GetItensPedidos()
         {
-            return this._contexto.ItensPedido.ToList();
+            var pedidoId = GetSessisonPedidoId();
+            var pedido = _contexto.Pedidos
+                .Where(p => p.Id == pedidoId)
+                .Single();
+            return this._contexto.ItensPedido
+                .Where(i => i.Pedido.Id == pedido.Id)
+                .ToList();
+                
 
+        }
+
+        public Pedido GetPedido()
+        {
+            int? pedidoId = GetSessisonPedidoId();
+            return _contexto.Pedidos
+                .Include(p => p.Itens)
+                    .ThenInclude(p => p.Produto)
+                .Where(p => p.Id == pedidoId)
+                .SingleOrDefault();
         }
 
         public List<Produto> GetProdutos()
@@ -64,8 +119,8 @@ namespace CasaDoCodigo
                 {
                     this._contexto.Produtos
                         .Add(produto);
-                    this._contexto.ItensPedido
-                        .Add(new ItemPedido(produto, 1));
+                //    this._contexto.ItensPedido
+                //        .Add(new ItemPedido(produto, 1));
                 }
                 this._contexto.SaveChanges();
             }
@@ -94,6 +149,14 @@ namespace CasaDoCodigo
             var carrinhoViewModel = new CarrinhoViewModel(itensPedido);
 
             return new UpdateItemPedidoReponse(itemPedidoDB, carrinhoViewModel);
+        }
+
+        public Pedido UpdateCadastro(Pedido cadastro)
+        {
+            var pedido = GetPedido();
+            pedido.UpdateCadastro(cadastro);
+            _contexto.SaveChanges();
+            return pedido;
         }
     }
 }

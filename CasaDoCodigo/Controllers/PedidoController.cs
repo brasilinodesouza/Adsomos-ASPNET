@@ -44,14 +44,40 @@ namespace CasaDoCodigo.Controllers
             CarrinhoViewModel viewModel = new CarrinhoViewModel(itensCarrinho);
             return viewModel;
         }
-
-        public IActionResult Resumo()
+        public IActionResult Cadastro()
         {
-            CarrinhoViewModel viewModel = GetCarrinhoViewModel();
+            var pedido = _dataService.GetPedido();
+            if (pedido == null)
+            {
+                return RedirectToAction("Carrosel");
+            }
+            else
+            {
+                return View(pedido);
+                
+            }
+        }
 
-            return View(viewModel); 
+        [HttpPost]
+
+        [ValidateAntiForgeryToken]
+        public IActionResult Resumo(Pedido cadastro)
+        {
+            if (ModelState.IsValid)
+            {
+                var pedido = _dataService.UpdateCadastro(cadastro);
+                return View(pedido);
+
+            }
+            else
+            {
+                return RedirectToAction("Cadastro");
+            }
+
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
+
         public UpdateItemPedidoReponse PostQuantidade([FromBody]ItemPedido input)
         {
             return _dataService.UpdateItemPedido(input);
