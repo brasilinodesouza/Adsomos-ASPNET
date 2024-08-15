@@ -47,7 +47,7 @@ namespace CasaDoCodigo.Migrations
 
                     b.HasIndex("ProdutoId");
 
-                    b.ToTable("ItensPedido");
+                    b.ToTable("ItensPedido", (string)null);
                 });
 
             modelBuilder.Entity("CasaDoCodigo.Models.Pedido", b =>
@@ -78,7 +78,7 @@ namespace CasaDoCodigo.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Pedidos");
+                    b.ToTable("Pedidos", (string)null);
                 });
 
             modelBuilder.Entity("CasaDoCodigo.Models.Produto", b =>
@@ -98,7 +98,7 @@ namespace CasaDoCodigo.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Produtos");
+                    b.ToTable("Produtos", (string)null);
                 });
 
             modelBuilder.Entity("CasaDoCodigo.Models.ItemPedido", b =>
