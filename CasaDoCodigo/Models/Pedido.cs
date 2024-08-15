@@ -28,20 +28,19 @@ namespace CasaDoCodigo.Models
             this.Estado = cadastro.Estado;
 
         }
-
         [Required(ErrorMessage = "Nome é obrigatório")]
         [StringLength(50, MinimumLength = 5)]
-        public string Nome { get;  set; }
+        public string? Nome { get;  set; }
         [Required]
-        public string Email { get;  set; }
+        public string? Email { get;  set; }
         [Required]
-        public string Telefone { get;  set; }
+        public string? Telefone { get;  set; }
         [Required]
-        public string Endereco { get;  set; }
+        public string? Endereco { get;  set; }
         [Required]
-        public string Municipio { get;  set; }
+        public string? Municipio { get;  set; }
         [Required]
-        public string Estado { get;  set; }
+        public string? Estado { get;  set; }
 
 
 
