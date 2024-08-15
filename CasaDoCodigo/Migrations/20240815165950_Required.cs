@@ -5,7 +5,7 @@
 namespace CasaDoCodigo.Migrations
 {
     /// <inheritdoc />
-    public partial class Cadastro : Migration
+    public partial class Required : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,37 +14,44 @@ namespace CasaDoCodigo.Migrations
                 name: "Email",
                 table: "Pedidos",
                 type: "nvarchar(max)",
-                nullable: true);
+                nullable: false,
+                defaultValue: "");
 
             migrationBuilder.AddColumn<string>(
                 name: "Endereco",
                 table: "Pedidos",
                 type: "nvarchar(max)",
-                nullable: true);
+                nullable: false,
+                defaultValue: "");
 
             migrationBuilder.AddColumn<string>(
                 name: "Estado",
                 table: "Pedidos",
                 type: "nvarchar(max)",
-                nullable: true);
+                nullable: false,
+                defaultValue: "");
 
             migrationBuilder.AddColumn<string>(
                 name: "Municipio",
                 table: "Pedidos",
                 type: "nvarchar(max)",
-                nullable: true);
+                nullable: false,
+                defaultValue: "");
 
             migrationBuilder.AddColumn<string>(
                 name: "Nome",
                 table: "Pedidos",
-                type: "nvarchar(max)",
-                nullable: true);
+                type: "nvarchar(50)",
+                maxLength: 50,
+                nullable: false,
+                defaultValue: "");
 
             migrationBuilder.AddColumn<string>(
                 name: "Telefone",
                 table: "Pedidos",
                 type: "nvarchar(max)",
-                nullable: true);
+                nullable: false,
+                defaultValue: "");
         }
 
         /// <inheritdoc />

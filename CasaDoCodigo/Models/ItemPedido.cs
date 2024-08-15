@@ -7,10 +7,10 @@ namespace CasaDoCodigo.Models
     public class ItemPedido : BaseModel
     {
         [DataMember]
-        
+        [Required]
         public Pedido Pedido { get;  set; }
         [DataMember]
-        
+        [Required]
         public Produto Produto { get;  set; }
         [DataMember]
         public int Quantidade { get;  set; }
