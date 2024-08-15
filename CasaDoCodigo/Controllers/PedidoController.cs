@@ -21,6 +21,7 @@ namespace CasaDoCodigo.Controllers
         
         }
 
+
         public IActionResult Carrinho(int? produtoId)
         {
             if (produtoId.HasValue)
@@ -34,6 +35,7 @@ namespace CasaDoCodigo.Controllers
             return View(viewModel);
         }
 
+
         private CarrinhoViewModel GetCarrinhoViewModel()
         {
             List<Produto> produtos =
@@ -44,6 +46,7 @@ namespace CasaDoCodigo.Controllers
             CarrinhoViewModel viewModel = new CarrinhoViewModel(itensCarrinho);
             return viewModel;
         }
+
         public IActionResult Cadastro()
         {
             var pedido = _dataService.GetPedido();
