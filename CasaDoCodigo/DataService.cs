@@ -16,6 +16,7 @@ namespace CasaDoCodigo
             this._contextAccessor = contextAccessor;
         }
 
+
         public void AddItemPedido(int produtoId)
         {
             var produto = _contexto.Produtos
@@ -53,6 +54,8 @@ namespace CasaDoCodigo
                 }
             }
         }
+
+
 
         private void SetSessionPedidoId(Pedido pedido)
         {
@@ -127,6 +130,8 @@ namespace CasaDoCodigo
 
         }
 
+
+
         public UpdateItemPedidoReponse UpdateItemPedido(ItemPedido itemPedido)
         {
             var itemPedidoDB = 
@@ -150,6 +155,7 @@ namespace CasaDoCodigo
 
             return new UpdateItemPedidoReponse(itemPedidoDB, carrinhoViewModel);
         }
+
 
         public Pedido UpdateCadastro(Pedido cadastro)
         {

@@ -44,6 +44,7 @@ namespace CasaDoCodigo.Controllers
             CarrinhoViewModel viewModel = new CarrinhoViewModel(itensCarrinho);
             return viewModel;
         }
+
         public IActionResult Cadastro()
         {
             var pedido = _dataService.GetPedido();
