@@ -60,7 +60,6 @@ namespace CasaDoCodigo.Controllers
         }
 
         [HttpPost]
-
         [ValidateAntiForgeryToken]
         public IActionResult Resumo(Pedido cadastro)
         {

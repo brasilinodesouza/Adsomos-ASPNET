@@ -64,13 +64,13 @@
         <div class="row">
             <div class="col-md-10">
                 @{
-                    if(Model.Itens.Count() < 2){
+                    if(Model.Itens.Count() < 2 ){
                                     <span numero-itens>Total: @Model.Itens.Count() item</span>
                     }else{
                                     <span>Total: @Model.Itens.Count() itens</span>
                     }
                     // OU fazer o ternario abaixo
-                    //<span>Total: @Model.Count()@(Model.Count() < 2 ? "item" : "itens") </span>
+                    // <span numero-itens>Total: @Model.Itens.Count() @(Model.Itens.Count() > 2 ? "item" : "itens") </span>
                 }
                 
 

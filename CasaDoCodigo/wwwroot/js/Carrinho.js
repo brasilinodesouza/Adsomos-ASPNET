@@ -68,12 +68,14 @@ class Carrinho {
             .find('[subtotal]').html(itemPedido.subtotal.duasCasas());
     }
     setTotal(carrinhoViewModel) {
+
         $('[total]').html(carrinhoViewModel.total.duasCasas())
     }
     removeItem(itemPedido) {
         this.getLinhaDoItem(itemPedido).remove();
 
     }
+
     setNumeroItens(carrinhoViewModel) {
         var texto = 'Total: ' + carrinhoViewModel.itens.length + ' ' + (carrinhoViewModel.itens.length > 1 ? 'itens' : 'item');
         $('[numero-itens]').html(texto)

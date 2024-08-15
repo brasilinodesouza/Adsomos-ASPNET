@@ -28,6 +28,8 @@ namespace CasaDoCodigo
                 int? pedidoID = GetSessisonPedidoId();
 
                 Pedido pedido = null;
+
+               
                 if (pedidoID.HasValue)
                 {
                     pedido = _contexto.Pedidos
@@ -40,7 +42,9 @@ namespace CasaDoCodigo
                     pedido = new Pedido();
                 }
 
-                if (!_contexto.ItensPedido
+
+
+                    if (!_contexto.ItensPedido
                     .Where(i =>
                         i.Pedido.Id == pedido.Id
                         && i.Produto.Id == produtoId)
@@ -153,7 +157,7 @@ namespace CasaDoCodigo
 
             var carrinhoViewModel = new CarrinhoViewModel(itensPedido);
 
-            return new UpdateItemPedidoReponse(itemPedidoDB, carrinhoViewModel);
+            return new UpdateItemPedidoReponse( itemPedidoDB, carrinhoViewModel);
         }
 
 
