@@ -77,14 +77,12 @@ namespace CasaDoCodigo
         public List<ItemPedido> GetItensPedidos()
         {
             var pedidoId = GetSessisonPedidoId();
-            var pedido = _contexto.Pedidos
-                .Where(p => p.Id == pedidoId)
-                .Single();
-            return this._contexto.ItensPedido
-                .Where(i => i.Pedido.Id == pedido.Id)
-                .ToList();
-                
 
+            var itens = this._contexto.ItensPedido
+                .Where(i => i.Pedido.Id == pedidoId)
+                .ToList();
+
+            return itens;
         }
 
         public Pedido GetPedido()
@@ -152,19 +150,9 @@ namespace CasaDoCodigo
 
             }
 
-            var itensPedido = _contexto.ItensPedido.ToList();
+            int? pedidoId = GetSessisonPedidoId();
+            var itensPedido = _contexto.ItensPedido.Where(x => x.Pedido.Id == pedidoId).ToList();
 
-
-            //int? pedidoId = GetSessisonPedidoId();
-
-            //var itensPedido = _contexto.ItensPedido
-            //    .Where(i => i.Id == pedidoId
-            //        && i.Id == itemPedidoDB.Id)
-            //    .ToList();
-
-
-
-            //
             var carrinhoViewModel = new CarrinhoViewModel(itensPedido);
 
             return new UpdateItemPedidoReponse( itemPedidoDB, carrinhoViewModel);

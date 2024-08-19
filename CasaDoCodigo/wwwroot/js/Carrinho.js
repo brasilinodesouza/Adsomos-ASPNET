@@ -1,7 +1,6 @@
 ﻿
 class Carrinho {
     getData(elemento) {
-        debugger;
         var linhaDoItem = $(elemento).parents('[item-id]');
         var itemId = linhaDoItem.attr('item-id');
         var qtde = linhaDoItem.find('input').val();
@@ -9,7 +8,6 @@ class Carrinho {
         return {
             Id: itemId,
             Quantidade: qtde
-
         };
     }
 
