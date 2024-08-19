@@ -13,10 +13,13 @@ namespace CasaDoCodigo.Models
         [Required]
         public Produto Produto { get;  set; }
         [DataMember]
+        [Required]
         public int Quantidade { get;  set; }
         [DataMember]
+        [Required]
         public decimal PrecoUnitario { get;  set; }
         [DataMember]
+        [Required]
         public decimal Subtotal {
             get { return Quantidade * PrecoUnitario; }
         }
@@ -40,7 +43,7 @@ namespace CasaDoCodigo.Models
 
         }
 
-        public  void AtualizaQuantidade (int quantidade)
+        public void AtualizaQuantidade (int quantidade)
         {
             this.Quantidade = quantidade;
         }

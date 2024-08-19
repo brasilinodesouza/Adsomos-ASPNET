@@ -42,18 +42,16 @@ namespace CasaDoCodigo
                     pedido = new Pedido();
                 }
 
-
-
-                    if (!_contexto.ItensPedido
-                    .Where(i =>
-                        i.Pedido.Id == pedido.Id
-                        && i.Produto.Id == produtoId)
-                    .Any())
+                if (!_contexto.ItensPedido
+                .Where(i =>
+                    i.Pedido.Id == pedido.Id
+                    && i.Produto.Id == produtoId)
+                .Any())
                 {
-                    _contexto.ItensPedido.Add(new ItemPedido(pedido, produto, 1));
-                    _contexto.SaveChanges();
+                _contexto.ItensPedido.Add(new ItemPedido(pedido, produto, 1));
+                _contexto.SaveChanges();
 
-                    SetSessionPedidoId(pedido);
+                SetSessionPedidoId(pedido);
 
                 }
             }
@@ -153,8 +151,20 @@ namespace CasaDoCodigo
                 _contexto.SaveChanges();
 
             }
+
             var itensPedido = _contexto.ItensPedido.ToList();
 
+
+            //int? pedidoId = GetSessisonPedidoId();
+
+            //var itensPedido = _contexto.ItensPedido
+            //    .Where(i => i.Id == pedidoId
+            //        && i.Id == itemPedidoDB.Id)
+            //    .ToList();
+
+
+
+            //
             var carrinhoViewModel = new CarrinhoViewModel(itensPedido);
 
             return new UpdateItemPedidoReponse( itemPedidoDB, carrinhoViewModel);
